@@ -20,6 +20,7 @@ public class MoveSpeeds
 }
 #endregion
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
 

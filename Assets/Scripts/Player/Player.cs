@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
 
@@ -11,7 +10,7 @@ public class Player : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        movementScript = GetComponent<PlayerMovement>();
+        movementScript = GetComponentInChildren<PlayerMovement>();
     }
 	
 	// Update is called once per frame
