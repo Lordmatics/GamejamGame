@@ -21,4 +21,21 @@ public class Player : MonoBehaviour
         movementScript.PlayerJump();
 	}
 
+    #region PROGRAMMING_KNOWLEDGE
+    // Design Patterns 
+
+    // Strategy Pattern
+    // Singleton Pattern
+    // Factory Pattern
+    // Observer Pattern
+
+    // Design Principles - SOLID
+    // Single Responsibilty Principle - SRP - Each class should only do one thing
+    // Open Closed Principle - OCP - Classes/Functions should be open for extension but closed for modification
+    // Liskovs Substitution Principle - LSP - child classes must be substitutable with its base class - Bannana* ban = new Fruit()
+    // Interface Segregation Principle - ISP - clients should not be forced to depend on methods they dont use
+    // Dependancy Inversion Principle - DIP - high level stuff should not depend on low level modules - abstractions should not depend on details.
+    #endregion
+
+
 }
