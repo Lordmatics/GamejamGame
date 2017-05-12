@@ -13,4 +13,9 @@ public static class ExtensionMethods
         trans.localScale = new Vector3(1, 1, 1);
     }
 
+    public static void ResetVelocity(this Rigidbody _rigid)
+    {
+        _rigid.velocity = Vector3.zero;
+        _rigid.angularVelocity = Vector3.zero;
+    }
 }

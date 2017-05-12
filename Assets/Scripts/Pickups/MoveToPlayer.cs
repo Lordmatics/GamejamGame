@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class MoveToPlayer : MonoBehaviour
 {
-    private Transform playerRef;
     private bool bBeginMove;
 
     [Range(0.0f, 0.5f)] [ Header("Speed of absorption")]
     public float speed = 0.2f;
     [Range(0.0f, 0.5f)] [Header("Proximity of absorption")]
-    public float range = 0.05f;
+    public float range = 0.45f;
     [Range(0.0f, 0.5f)] [Header("Proximity of absorption")][SerializeField]
     private float delayForActivation = 0.3f;
+
+    private Transform absorptionTransform;
 
     public delegate void OnDestroy();
     public event OnDestroy OnDestroyed;
@@ -21,7 +22,7 @@ public class MoveToPlayer : MonoBehaviour
     void Start ()
     {
         // Allocate reference to single player
-        playerRef = GameObject.FindObjectOfType<Player>().transform.GetChild(0).transform;
+        absorptionTransform = GameObject.FindGameObjectWithTag("Absorb").transform;//GameObject.FindObjectOfType<Player>().transform.GetChild(0).transform;
 	}
 	
     void OnEnable()
@@ -69,14 +70,14 @@ public class MoveToPlayer : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         // Then float into the player
-        while (Vector3.Distance(transform.position, playerRef.position) > range)
+        while (Vector3.Distance(transform.position, absorptionTransform.position) > range)
         {
-            transform.LookAt(playerRef.position);
+            transform.LookAt(absorptionTransform.position);
             transform.Translate(Vector3.forward * speed);
             speed += Time.deltaTime * 0.1f;
             yield return new WaitForEndOfFrame();
         }
-        if (Vector3.Distance(transform.position, playerRef.position) <= range)
+        if (Vector3.Distance(transform.position, absorptionTransform.position) <= range)
         {
             if (OnDestroyed != null)
                 OnDestroyed();

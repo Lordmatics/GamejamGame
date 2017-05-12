@@ -7,18 +7,70 @@ public class Player : MonoBehaviour
 
     private PlayerMovement movementScript;
 
-	// Use this for initialization
-	void Start ()
+    private MovementStateMachine movementSM;
+
+    public static Player instance;
+
+    // Use this for initialization
+
+    public enum PlayerState { Ground , Air, Climb, Falling };
+    public PlayerState currentState = PlayerState.Ground;
+
+    void Awake()
     {
+        instance = this;
+
         movementScript = GetComponentInChildren<PlayerMovement>();
+
+        movementSM = GetComponentInChildren<MovementStateMachine>();
     }
 
-	// Update is called once per frame
-	void Update ()
+    void Start ()
     {
-        movementScript.PlayerControls();
-        movementScript.PlayerJump();
+        movementScript.AssignJumpEvent(movementSM.OnJumped);
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        switch(currentState)
+        {
+            case PlayerState.Ground:
+                movementScript.PlayerGroundControls();
+                movementScript.PlayerJump();
+                break;
+            case PlayerState.Air:
+                movementScript.PlayerGlide();
+                break;
+            
+            case PlayerState.Climb:
+                movementScript.PlayerClimbControls();
+                break;
+            case PlayerState.Falling:
+                break;
+        }
+        //movementScript.PlayerJump();
 	}
+
+    public void ToGroundState()
+    {
+        currentState = PlayerState.Ground;
+    }
+
+    public void ToAirState()
+    {
+        currentState = PlayerState.Air;
+    }
+
+    public void ToClimbState()
+    {
+        currentState = PlayerState.Climb;
+    }
+
+    public void ToFallingState()
+    {
+        currentState = PlayerState.Falling;
+    }
 
     #region PROGRAMMING_KNOWLEDGE
     // Design Patterns 
