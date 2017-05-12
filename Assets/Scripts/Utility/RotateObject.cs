@@ -23,10 +23,10 @@ public class RotateObject : MonoBehaviour
         switch(chance)
         {
             case true:
-                transform.Rotate(new Vector3(1, 1, 0), Time.deltaTime * rotationSpeed);
+                transform.Rotate(new Vector3(0.25f, 1.0f, 0.0f), Time.deltaTime * rotationSpeed);
                 break;
             case false:
-                transform.Rotate(new Vector3(0, 1, 1), Time.deltaTime * rotationSpeed);
+                transform.Rotate(new Vector3(0.0f, 1.0f, 0.25f), Time.deltaTime * rotationSpeed);
                 break;
         }
     }
