@@ -10,7 +10,8 @@ public class NutSpawner : MonoBehaviour
 
     public void BuildObject()
     {
-        GameObject spawnedObj = (GameObject)Instantiate(Resources.Load("NutPickup" , typeof(GameObject)), spawnPoint, Quaternion.identity);
+        //GameObject spawnedObj = (GameObject)
+        Instantiate(Resources.Load("NutPickup" , typeof(GameObject)), spawnPoint, Quaternion.identity);
         //if (parents.Length > 0)
         //    if (parentIndex < parents.Length)
         //    {

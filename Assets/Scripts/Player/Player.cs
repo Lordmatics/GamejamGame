@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     {
         movementScript = GetComponentInChildren<PlayerMovement>();
     }
-	
+
 	// Update is called once per frame
 	void Update ()
     {
