@@ -13,5 +13,9 @@ public class PlayerEditor : Editor
         //base.OnInspectorGUI();
         DrawDefaultInspector();
 
+        EditorGUILayout.HelpBox("Controls", MessageType.Info);
+        EditorGUILayout.HelpBox("WASD - Movement", MessageType.Info);
+        EditorGUILayout.HelpBox("Space - Jump", MessageType.Info);
+        EditorGUILayout.HelpBox("Hold Space in mid air - Glide", MessageType.Info);
     }
 }
