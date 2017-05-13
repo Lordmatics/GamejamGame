@@ -133,6 +133,12 @@ public class PlayerMovement : MonoBehaviour
         return Time.time - airSpeeds.timeSinceJump;
     }
 
+    void Update()
+    {
+        Debug.Log(transform.eulerAngles + "My Euler Angles");
+        Debug.Log(Camera.main.transform.eulerAngles + "Camera Euler Angles");
+    }
+
     // Enable Player movement on the ground
     public void PlayerGroundControls()
     {
@@ -144,35 +150,38 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(movementVector, rotationTransform);
         if(bDebugRotation)
         {
-            transform.Rotate(0.0f, x * 25.0f, 0.0f);
-            float minRot = Camera.main.transform.localEulerAngles.y - 90.0f;
-            float maxRot = Camera.main.transform.localEulerAngles.y + 90.0f;
-            if (Camera.main.transform.localEulerAngles.y >= 270.0f && Camera.main.transform.localEulerAngles.y < 360.0f)
+            //transform.Rotate(0.0f, x * 25.0f, 0.0f);
+            float minRot = Camera.main.transform.eulerAngles.y - 90.0f;
+            float maxRot = Camera.main.transform.eulerAngles.y + 90.0f;
+            if (Camera.main.transform.eulerAngles.y >= 270.0f && Camera.main.transform.eulerAngles.y < 360.0f)
             {
-                minRot = Camera.main.transform.localEulerAngles.y - 90.0f;
-                float temp = 360.0f - Camera.main.transform.localEulerAngles.y;
+                minRot = Camera.main.transform.eulerAngles.y - 90.0f;
+                float temp = 360.0f - Camera.main.transform.eulerAngles.y;
                 maxRot = temp + 90.0f;
             }
-            if (Camera.main.transform.localEulerAngles.y <= 90.0f && Camera.main.transform.localEulerAngles.y > 0.0f)
+            if (Camera.main.transform.eulerAngles.y <= 90.0f && Camera.main.transform.eulerAngles.y > 0.0f)
             {
-                float temp = 90.0f - Camera.main.transform.localEulerAngles.y;
+                float temp = 90.0f - Camera.main.transform.eulerAngles.y;
                 minRot = -temp;
-                maxRot = Camera.main.transform.localEulerAngles.y + 90.0f;
+                maxRot = Camera.main.transform.eulerAngles.y + 90.0f;
             }
 
             //Debug.Log(minRot);
             //Debug.Log(maxRot);
             //Debug.Log(Camera.main.transform.localEulerAngles.y);
-            transform.rotation = new Quaternion(transform.rotation.x, Mathf.Clamp(transform.rotation.y, minRot, maxRot), transform.rotation.z, 1.0f);
+           // Mathf.Clamp(transform.eulerAngles.y, minRot, maxRot)
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Lerp(transform.eulerAngles.y, Camera.main.transform.eulerAngles.y, Time.deltaTime * 7.5f), transform.eulerAngles.z);
         }
         else
         {
+            //Mathf.Lerp(transform.eulerAngles.y,Camera.main.transform.eulerAngles.y,Time.deltaTime * 7.5f)
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, Camera.main.transform.eulerAngles.y , transform.eulerAngles.z);
             // transform.rotation = new Quaternion(transform.rotation.x, GameObject.FindGameObjectWithTag("MainCamera").transform.rotation.y, transform.rotation.z , 1.0f);
-            Debug.Log(transform.rotation + ".Rotation - Player");
-            Debug.Log(transform.eulerAngles + ".EulerAngles - Player");
+            //Debug.Log(transform.rotation + ".Rotation - Player");
+            //Debug.Log(transform.eulerAngles + ".EulerAngles - Player");
 
-            Debug.Log(Camera.main.transform.rotation + ".Rotation - Cam");
-            Debug.Log(Camera.main.transform.eulerAngles + ".EulerAngles - Cam");
+            //Debug.Log(Camera.main.transform.rotation + ".Rotation - Cam");
+            //Debug.Log(Camera.main.transform.eulerAngles + ".EulerAngles - Cam");
         }
 
 
@@ -237,7 +246,14 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             // Only Jumped - Didn't initiate glide
-            //PlayerGroundControls();
+            PlayerGroundControls();
+        }
+        // Send help
+        if (Input.GetButton("PlayerFall"))//Input.GetKeyUp(KeyCode.Space))
+        {
+            _rigidbody.ResetVelocity();
+            SetTime();
+            Player.instance.ToFallingState();
         }
     }
 
