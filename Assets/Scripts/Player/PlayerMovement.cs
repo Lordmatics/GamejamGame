@@ -7,12 +7,12 @@ using UnityEngine;
 public class MoveSpeeds
 {
     [Header("Horizontal Ground Speed")]
-    public float horizontalSpeed = 250.0f;
+    public float horizontalSpeed = 10.0f;
 
     [Header("Vertical Ground Speed")]
     public float verticalSpeed = 10.0f;
 
-    public MoveSpeeds(float x = 250.0f, float y = 10.0f)
+    public MoveSpeeds(float x = 10.0f, float y = 10.0f)
     {
         horizontalSpeed = x;
         verticalSpeed = y;
@@ -132,8 +132,14 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * movespeeds.horizontalSpeed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * movespeeds.verticalSpeed;
 
-        transform.Rotate(0, x, 0);
-        transform.Translate(0, 0, z);
+        x *= Camera.main.transform.right.x;
+
+        z *= Camera.main.transform.forward.z;
+
+        //transform.Rotate(0, x, 0);
+        //transform.position = new Vector3(Camera.main.transform.position.x + x, 0.0f, Camera.main.transform.position.z + z);
+        transform.Translate(x, 0, z);
+        //_rigidbody.MovePosition(transform.position + new Vector3(x,z,0.0f))
     }
 
     public void PlayerAirControls()

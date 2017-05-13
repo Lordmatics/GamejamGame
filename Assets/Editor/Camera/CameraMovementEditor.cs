@@ -11,6 +11,12 @@ public class CameraMovementEditor : Editor
         EditorGUILayout.HelpBox("Controls for the camera movement", MessageType.Info);
 
         base.OnInspectorGUI();
+
+        CameraMovement myScript = (CameraMovement)target;
+        if (GUILayout.Button("Update Offset"))
+        {
+            myScript.UpdateOffset();
+        }
     }
 
 }
