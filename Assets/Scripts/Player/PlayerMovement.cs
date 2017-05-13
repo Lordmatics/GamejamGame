@@ -94,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
     public delegate void JumpDelegate();
     private JumpDelegate OnFlyBegin;
 
+    [SerializeField][Header("Turn this off for sanity")]
+    private bool bDebugRotation = false;
     // Utility for performance
     // Only bind event once - as opposed to every frame
     // If return type wasn't void, could use llambda function instead - a => a.b
@@ -136,28 +138,47 @@ public class PlayerMovement : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * movespeeds.horizontalSpeed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * movespeeds.verticalSpeed;
-
-        //Vector3 movement = new Vector3(x, 0.0f, z);
-        //_rigidbody.velocity = movement * movespeeds.verticalSpeed;
-
-        //float tilt = 1.0f;
-        //_rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, _rigidbody.velocity.x * -tilt);
-
-
-
-        //Vector3 cameraTransform = new Vector3(Camera.main.transform.position.x, 0.0f, Camera.main.transform.position.z);
-        Vector3 cameraTransform = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0.0f);
-
-
-        Transform tempTransform = Camera.main.transform;
-
-        tempTransform.position = cameraTransform;
-
-        //tempTransform.rotation = new Quaternion(0.0f, tempTransform.rotation.y, 0.0f, 1.0f);
-
-
+        
+        // Scripted movement - can dabble with physics movement later if we feel this isn't good enough
         Vector3 movementVector = new Vector3(x, 0.0f, z);
         transform.Translate(movementVector, rotationTransform);
+        if(bDebugRotation)
+        {
+            transform.Rotate(0.0f, x * 25.0f, 0.0f);
+            float minRot = Camera.main.transform.localEulerAngles.y - 90.0f;
+            float maxRot = Camera.main.transform.localEulerAngles.y + 90.0f;
+            if (Camera.main.transform.localEulerAngles.y >= 270.0f && Camera.main.transform.localEulerAngles.y < 360.0f)
+            {
+                minRot = Camera.main.transform.localEulerAngles.y - 90.0f;
+                float temp = 360.0f - Camera.main.transform.localEulerAngles.y;
+                maxRot = temp + 90.0f;
+            }
+            if (Camera.main.transform.localEulerAngles.y <= 90.0f && Camera.main.transform.localEulerAngles.y > 0.0f)
+            {
+                float temp = 90.0f - Camera.main.transform.localEulerAngles.y;
+                minRot = -temp;
+                maxRot = Camera.main.transform.localEulerAngles.y + 90.0f;
+            }
+
+            //Debug.Log(minRot);
+            //Debug.Log(maxRot);
+            //Debug.Log(Camera.main.transform.localEulerAngles.y);
+            transform.rotation = new Quaternion(transform.rotation.x, Mathf.Clamp(transform.rotation.y, minRot, maxRot), transform.rotation.z, 1.0f);
+        }
+        else
+        {
+            // transform.rotation = new Quaternion(transform.rotation.x, GameObject.FindGameObjectWithTag("MainCamera").transform.rotation.y, transform.rotation.z , 1.0f);
+            Debug.Log(transform.rotation + ".Rotation - Player");
+            Debug.Log(transform.eulerAngles + ".EulerAngles - Player");
+
+            Debug.Log(Camera.main.transform.rotation + ".Rotation - Cam");
+            Debug.Log(Camera.main.transform.eulerAngles + ".EulerAngles - Cam");
+        }
+
+
+
+        //transform.rotation = new Quaternion(transform.rotation.x, Mathf.LerpUnclamped(transform.rotation.y, Camera.main.transform.rotation.y, Time.deltaTime * 5.0f), transform.rotation.z, 1.0f);
+        //transform.rotation = Quaternion.LerpUnclamped(transform.rotation, Camera.main.transform.rotation, Time.deltaTime * 5.0f);
 
     }
 
@@ -168,6 +189,11 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Rotate(0, x, 0);
         //transform.Translate(x, 0, 0);
+
+        // Can tilt the players body when flying
+        //Vector3 movement = new Vector3(x, 0.0f, z);
+        //_rigidbody.velocity = movement * airSpeeds.verticalSpeed;
+        //rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, rigidbody.velocity.x * -tilt);
     }
 
     public void PlayerClimbControls()
@@ -182,7 +208,8 @@ public class PlayerMovement : MonoBehaviour
     // Event for jumping vertically
     public void PlayerJump()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("PlayerJump"))
         {
             _rigidbody.AddForce(jumpForce);
             if (OnFlyBegin != null)
@@ -193,13 +220,13 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerGlide()
     {
         // While space is held down apply force
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetButton("PlayerJump"))
         {
             if(GetElapsedTime() >= airSpeeds.glideDelay)
             {
                 _rigidbody.AddForce(transform.forward * Time.deltaTime * airSpeeds.glideMagnitude + (Vector3.up * airSpeeds.gravityDampener), ForceMode.Acceleration);
                 PlayerAirControls();
-                if (Input.GetKeyUp(KeyCode.Space))
+                if (Input.GetButton("PlayerFall"))//Input.GetKeyUp(KeyCode.Space))
                 {
                     _rigidbody.ResetVelocity();
                     SetTime();
@@ -210,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             // Only Jumped - Didn't initiate glide
-            PlayerGroundControls();
+            //PlayerGroundControls();
         }
     }
 
