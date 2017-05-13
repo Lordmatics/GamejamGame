@@ -87,6 +87,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private ClimbSpeeds climbSpeeds = new ClimbSpeeds();
 
+    [SerializeField]
+    private Transform rotationTransform;
+
     // Jump event - to notify state machine to update state
     public delegate void JumpDelegate();
     private JumpDelegate OnFlyBegin;
@@ -104,6 +107,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.freezeRotation = true;
+
+        rotationTransform = GameObject.FindGameObjectWithTag("RotationTransform").transform;
     }
 
     void OnEnable()
@@ -132,14 +137,28 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * movespeeds.horizontalSpeed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * movespeeds.verticalSpeed;
 
-        x *= Camera.main.transform.right.x;
+        //Vector3 movement = new Vector3(x, 0.0f, z);
+        //_rigidbody.velocity = movement * movespeeds.verticalSpeed;
 
-        z *= Camera.main.transform.forward.z;
+        //float tilt = 1.0f;
+        //_rigidbody.rotation = Quaternion.Euler(0.0f, 0.0f, _rigidbody.velocity.x * -tilt);
 
-        //transform.Rotate(0, x, 0);
-        //transform.position = new Vector3(Camera.main.transform.position.x + x, 0.0f, Camera.main.transform.position.z + z);
-        transform.Translate(x, 0, z);
-        //_rigidbody.MovePosition(transform.position + new Vector3(x,z,0.0f))
+
+
+        //Vector3 cameraTransform = new Vector3(Camera.main.transform.position.x, 0.0f, Camera.main.transform.position.z);
+        Vector3 cameraTransform = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0.0f);
+
+
+        Transform tempTransform = Camera.main.transform;
+
+        tempTransform.position = cameraTransform;
+
+        //tempTransform.rotation = new Quaternion(0.0f, tempTransform.rotation.y, 0.0f, 1.0f);
+
+
+        Vector3 movementVector = new Vector3(x, 0.0f, z);
+        transform.Translate(movementVector, rotationTransform);
+
     }
 
     public void PlayerAirControls()

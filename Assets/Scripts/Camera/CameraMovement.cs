@@ -29,13 +29,19 @@ public class CameraMovement : MonoBehaviour
     private Transform playerTransform;
 
     [SerializeField]
-    private Vector3 offset;
+    private Vector3 offsetHorizontal;
+
+    [SerializeField]
+    private Vector3 offsetVertical;
 
     [SerializeField]
     private CameraStruct cameraValues = new CameraStruct(7.0f, 4.5f);
 
     [SerializeField]
-    private string axis = "Xbox X";
+    private string axisHorizontal = "Xbox X";
+
+    [SerializeField]
+    private string axisVertical = "Xbox Y";
 
     void Start()
     {
@@ -47,16 +53,18 @@ public class CameraMovement : MonoBehaviour
     {
         if (bTest)
         {
-            offset = Quaternion.AngleAxis(Input.GetAxis(axis) * turnSpeed, Vector3.up) * offset;
+            offsetHorizontal = Quaternion.AngleAxis(Input.GetAxis(axisHorizontal) * turnSpeed, Vector3.up) * offsetHorizontal;
+            //offsetVertical = Quaternion.AngleAxis(Input.GetAxis(axisVertical) * turnSpeed, Vector3.right) * offsetVertical;
         }
 
-        transform.position = playerTransform.position + offset;
+        transform.position = playerTransform.position + offsetHorizontal;// + offsetVertical;
         transform.LookAt(playerTransform.position);
     }
 
     public void UpdateOffset()
     {
-        offset = new Vector3(playerTransform.position.x, playerTransform.position.y + cameraValues.y, playerTransform.position.z + cameraValues.z);
+        offsetHorizontal = new Vector3(playerTransform.position.x, playerTransform.position.y + cameraValues.y, playerTransform.position.z + cameraValues.z);
+        //offsetVertical = new Vector3(playerTransform.position.x, playerTransform.position.y + cameraValues.y, playerTransform.position.z + cameraValues.z);
 
     }
 }

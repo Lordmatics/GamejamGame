@@ -10,6 +10,8 @@ public class CameraMovementEditor : Editor
     {
         EditorGUILayout.HelpBox("Controls for the camera movement", MessageType.Info);
 
+        EditorGUILayout.HelpBox("This object must be tagged MainCamera for this to work", MessageType.Warning);
+
         base.OnInspectorGUI();
 
         CameraMovement myScript = (CameraMovement)target;

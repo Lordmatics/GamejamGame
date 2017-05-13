@@ -12,6 +12,9 @@ public class PlayerMovementEditor : Editor
     {
         EditorGUILayout.HelpBox("Player Movement Script - Handles only the movement logic", MessageType.Info);
 
+        EditorGUILayout.HelpBox("This script must be tagged as Player for anything to work", MessageType.Warning);
+
+
         base.OnInspectorGUI();
 
 
