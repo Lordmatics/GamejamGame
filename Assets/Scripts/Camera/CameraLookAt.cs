@@ -9,14 +9,9 @@ public class CameraLookAt : MonoBehaviour
     
     public Transform lookAtTarget;
 
-    public float dampener = 6.0f;
+    public float dampener = 10.0f;
 
     public bool bSmooth = true;
-
-
-    public bool bTestA = false;
-
-    public bool bTestB = true;
 
     void LateUpdate()
     {
@@ -33,5 +28,10 @@ public class CameraLookAt : MonoBehaviour
                 transform.LookAt(lookAtTarget);
             }
         }
+    }
+
+    public void LocatePlayer()
+    {
+        lookAtTarget = GameObject.FindGameObjectWithTag("Player").transform;
     }
 }

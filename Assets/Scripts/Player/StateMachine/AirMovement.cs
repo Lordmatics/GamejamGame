@@ -32,6 +32,7 @@ public class AirMovement : IMovementState
 
     public void ToGroundMovementState()
     {
+        Player.instance.movementScript.ResetRigidbodyVelocities();
         movementStateMachine.currentState = movementStateMachine.groundState;
     }
 

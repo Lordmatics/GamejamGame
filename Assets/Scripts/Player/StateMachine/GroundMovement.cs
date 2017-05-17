@@ -13,14 +13,14 @@ public class GroundMovement : IMovementState
 
     public void UpdateState()
     {
-        Debug.Log("Updating Ground State");
+        //Debug.Log("Updating Ground State");
         // Do ground movement functionality
         Player.instance.ToGroundState();
     }
 
     public void TransitionCondition(Collider other)
     {
-        Debug.Log("Ground Transition Collider from: " + other.gameObject.name);
+        //Debug.Log("Ground Transition Collider from: " + other.gameObject.name);
         if(other.gameObject.CompareTag("Ground"))
         {
             ToGroundMovementState();
@@ -33,6 +33,7 @@ public class GroundMovement : IMovementState
 
     public void ToGroundMovementState()
     {
+        Player.instance.movementScript.ResetRigidbodyVelocities();
         movementStateMachine.currentState = movementStateMachine.groundState;
     }
 

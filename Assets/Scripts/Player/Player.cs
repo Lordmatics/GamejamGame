@@ -5,8 +5,8 @@ using UnityEngine;
 [AddComponentMenu("Scripts/Player/Player")]
 public class Player : MonoBehaviour
 {
-
-    private PlayerMovement movementScript;
+    [HideInInspector]
+    public PlayerMovement movementScript;
 
     private MovementStateMachine movementSM;
 
@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
                 movementScript.PlayerClimbControls();
                 break;
             case PlayerState.Falling:
+                movementScript.PlayerFall();
                 break;
         }
         //movementScript.PlayerJump();

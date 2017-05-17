@@ -42,8 +42,8 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private string axisHorizontal = "Xbox X";
 
-    [SerializeField]
-    private string axisVertical = "Xbox Y";
+    //[SerializeField]
+    //private string axisVertical = "Xbox Y";
 
     void Start()
     {

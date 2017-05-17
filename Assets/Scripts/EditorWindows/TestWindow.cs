@@ -18,7 +18,7 @@ public class TestWindow : EditorWindow
     public static void Init()
     {
         // Get existing open window or if none, make a new one:
-        TestWindow window = (TestWindow)EditorWindow.GetWindow(typeof(TestWindow));
+        GetWindow(typeof(TestWindow));
     }
 
     void OnGUI()
