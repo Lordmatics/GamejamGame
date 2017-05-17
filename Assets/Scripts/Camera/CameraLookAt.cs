@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("Scripts/Camera/CameraLookAt")]
+[RequireComponent(typeof(CameraFollow))]
 public class CameraLookAt : MonoBehaviour
 {
 
-    
     public Transform lookAtTarget;
 
     public float dampener = 10.0f;
