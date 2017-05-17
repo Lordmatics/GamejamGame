@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Scripts/Pickups/MoveToPlayer")]
 public class MoveToPlayer : MonoBehaviour
 {
     private bool bBeginMove;

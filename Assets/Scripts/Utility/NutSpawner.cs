@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Scripts/Utility/NutSpawner")]
 public class NutSpawner : MonoBehaviour
 {
 

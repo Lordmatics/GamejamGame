@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Any global one to many events occur in here
+[AddComponentMenu("Scripts/Utility/EventManager")]
 public class EventManager : MonoBehaviour
 {
 

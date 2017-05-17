@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Scripts/Utility/RotateObject")]
 public class RotateObject : MonoBehaviour
 {
 

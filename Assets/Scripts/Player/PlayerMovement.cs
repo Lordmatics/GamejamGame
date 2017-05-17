@@ -69,6 +69,7 @@ public class ClimbSpeeds
 #endregion
 
 [RequireComponent(typeof(Rigidbody))]
+[AddComponentMenu("Scripts/Player/PlayerMovement")]
 public class PlayerMovement : MonoBehaviour
 {
 

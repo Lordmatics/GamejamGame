@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Scripts/Player/StateMachine/MovementStateMachine")]
 public class MovementStateMachine : MonoBehaviour
 {
 

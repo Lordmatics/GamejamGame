@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Scripts/Utility/CopyCameraTransform")]
 public class CopyCameraTransform : MonoBehaviour
 {
     [SerializeField]

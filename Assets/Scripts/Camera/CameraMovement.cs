@@ -17,6 +17,8 @@ public class CameraStruct
         z = b;
     }
 }
+
+[AddComponentMenu("Scripts/Camera/CameraMovement")]
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]

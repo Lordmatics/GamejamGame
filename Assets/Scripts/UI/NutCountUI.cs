@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[AddComponentMenu("Scripts/UI/NutCountUI")]
 public class NutCountUI : MonoBehaviour
 {
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Scripts/Player/PlayerPickup")]
 public class PlayerPickup : MonoBehaviour
 {
 	void OnTriggerEnter(Collider other)
