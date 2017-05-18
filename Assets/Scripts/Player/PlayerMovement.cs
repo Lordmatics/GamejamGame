@@ -99,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
     private bool bIsGliding = false;
     private StoredVelocities previousVelocities;
 
+    private PlayerAnimations animScript;
+
     //[SerializeField][Header("Turn this off for sanity")]
     //private bool bDebugRotation = false;
 
@@ -115,6 +117,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.freezeRotation = true;
+
+        animScript = GetComponent<PlayerAnimations>();
 
         rotationTransform = GameObject.FindGameObjectWithTag("RotationTransform").transform;
     }
@@ -151,6 +155,14 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * movespeeds.horizontalSpeed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * movespeeds.verticalSpeed;
         
+        if(Mathf.Abs(z) > 0.0f)
+        {
+            animScript.SetAnimRunning(true);
+        }
+        else
+        {
+            animScript.SetAnimRunning(false);
+        }
         // Scripted movement - can dabble with physics movement later if we feel this isn't good enough
         Vector3 movementVector = new Vector3(0.0f, 0.0f, z);
         transform.Translate(movementVector, rotationTransform);

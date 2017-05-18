@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ce6b718dcd3288448a883c67934fc878
-timeCreated: 1495137925
+timeCreated: 1495139495
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -91,7 +91,97 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Nuts_VerA_RigTest_Anim_Run
+      takeName: Nuts_VerA_RigTest_Anim_Run
+      firstFrame: 0
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CharacterTest
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Hips
+        weight: 1
+      - path: Root/Hips/Hip_L
+        weight: 1
+      - path: Root/Hips/Hip_L/Knee_L
+        weight: 1
+      - path: Root/Hips/Hip_L/Knee_L/Ankle_L
+        weight: 1
+      - path: Root/Hips/Hip_L/Knee_L/Ankle_L/Foot1_L
+        weight: 1
+      - path: Root/Hips/Hip_L/Knee_L/Ankle_L/Foot1_L/Foot2_L
+        weight: 1
+      - path: Root/Hips/Hip_R
+        weight: 1
+      - path: Root/Hips/Hip_R/Knee_R
+        weight: 1
+      - path: Root/Hips/Hip_R/Knee_R/Ankle_R
+        weight: 1
+      - path: Root/Hips/Hip_R/Knee_R/Ankle_R/Foot1_R
+        weight: 1
+      - path: Root/Hips/Hip_R/Knee_R/Ankle_R/Foot1_R/Foot2_R
+        weight: 1
+      - path: Root/Hips/Spine1
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_L
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_L/Shoulder_L
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_L/Shoulder_L/Elbow_L
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_L/Shoulder_L/Elbow_L/Wrist_L
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_L/Shoulder_L/Elbow_L/Wrist_L/hand_L
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_R
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_R/Shoulder_R
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_R/Shoulder_R/Elbow_R
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_R/Shoulder_R/Elbow_R/Wrist_R
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Clavicle_R/Shoulder_R/Elbow_R/Wrist_R/hand_R
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Neck1
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Neck1/Neck2
+        weight: 1
+      - path: Root/Hips/Spine1/Spine2/Spine3/Spine4/Neck1/Neck2/Head1
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

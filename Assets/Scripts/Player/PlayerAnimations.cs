@@ -13,6 +13,14 @@ public class PlayerAnimations : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    public bool GetAnimRunning()
+    {
+        return _animator.GetBool("IsRunning");
+    }
 
+    public void SetAnimRunning(bool _state)
+    {
+        _animator.SetBool("IsRunning", _state);
+    }
 
 }
